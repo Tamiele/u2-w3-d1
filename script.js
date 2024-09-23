@@ -61,6 +61,52 @@ console.log(personOne.confrontoEtà(personeTwo));
 
 // persona1.anzianita(registroPersone);
 
+/////////////////////////////////////////////////////
+//secondo esercizio
+class Pet {
+  constructor(_petName, _ownerName, _spacies, _bread) {
+    this.petName = _petName;
+    this.ownerName = _ownerName;
+    this.spacies = _spacies;
+    this.bread = _bread;
+  }
+  // Metodo per confrontare se due animali hanno lo stesso proprietario
+  hasTheSameOwner(otherPet) {
+    if (this.ownerName === otherPet.ownerName) {
+      return true;
+    } else {
+      return false;
+    }
+  } //in questo caso otherPet riceve il parametro grazie al secondo forEach nella funzione generatePetList
+}
+
+const arrayPet = [];
+const generatePetList = function () {
+  let lista = document.querySelector(".lista");
+  lista.innerHTML = ""; //svuota la lista cosi da non ricopiare elementi gia creati
+  arrayPet.forEach((pet, index) => {
+    let listLi = document.createElement("li");
+    listLi.innerText =
+      pet.ownerName +
+      " è il proprietario di " +
+      pet.petName +
+      " che è un " +
+      pet.spacies +
+      " " +
+      pet.bread;
+    arrayPet.forEach((otherPet, otherIndex) => {
+      //Ogni volta che il secondo forEach viene eseguito, otherPet riceve un valore da arrayPet
+      if (index !== otherIndex && pet.hasTheSameOwner(otherPet)) {
+        // Se l'index è diverso (per evitare di confrontare lo stesso animale) e il proprietario è lo stesso
+        listLi.style.color = "green"; // Se trova un animale con lo stesso proprietario, cambia il colore del testo a verde
+      }
+    });
+
+    // Aggiunge l'elemento <li> generato alla lista HTML
+    lista.appendChild(listLi);
+  });
+};
+
 let form = document.querySelector("form");
 let nomeAnimale = document.querySelector(".nomeAnimale");
 let proprietario = document.querySelector(".proprietario");
@@ -68,18 +114,15 @@ let specieAnimale = document.querySelector(".specieAnimale");
 let razzaAnimale = document.querySelector(".razzaAnimale");
 
 form.addEventListener("submit", function (e) {
-  e.defaultPrevented();
-  nomeAnimale = textnomeAnimale.value;
-  proprietario = textproprietario.value;
-  specieAnimale = specieAnimale.value;
-  razzaAnimale = razzaAnimale.value;
-
-  class Pet {
-    constructor(_petName, _ownerName, _spacies, _bread) {
-      this.petName = _petName;
-      this.ownerName = _ownerName;
-      this.spacies = _spacies;
-      this.bread = _bread;
-    }
-  }
+  e.preventDefault();
+  // Crea un nuovo oggetto `Pet` usando i valori inseriti nel form
+  const createdPet = new Pet(
+    nomeAnimale.value,
+    proprietario.value,
+    specieAnimale.value,
+    razzaAnimale.value
+  );
+  arrayPet.push(createdPet);
+  form.reset(); // Resetta i campi del form una volta inviato
+  generatePetList(); // Rigenera la lista degli animali, incluso l'ultimo appena aggiunto
 });

@@ -11,7 +11,18 @@
       input {
         display: block;
         margin-bottom: 10px;
-        padding: 1rem;
+        width: 50%;
+        padding-block: 1em;
+      }
+
+      button {
+        border: none;
+        border-radius: 5px;
+        font-size: 2rem;
+        cursor: pointer;
+        background-color: black;
+        padding-inline: 1rem;
+        color: white;
       }
     </style>
   </head>
@@ -22,24 +33,29 @@
         class="nomeAnimale"
         type="text"
         placeholder="Inserisci il nome dell'Animale"
+        required
       />
       <input
+        required
         class="proprietario"
         type="text"
         placeholder="Inserisci il nome del Proprietario"
       />
       <input
+        required
         class="specieAnimale"
         type="text"
         placeholder="Inserisci la Specie"
       />
       <input
+        required
         class="razzaAnimale"
         type="text"
         placeholder="Inserisci la Razza "
       />
       <button>Invia</button>
     </form>
+    <ul class="lista"></ul>
     <script src="./script.js"></script>
   </body>
 </html>
