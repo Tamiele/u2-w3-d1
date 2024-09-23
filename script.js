@@ -95,7 +95,10 @@ const generatePetList = function () {
       " " +
       pet.bread;
     arrayPet.forEach((otherPet, otherIndex) => {
+      //otherPet è l'animale corrente su cui il ciclo sta iterando.
+      //otherIndex è l'indice di quell'animale all'interno dell'array arrayPet.
       //Ogni volta che il secondo forEach viene eseguito, otherPet riceve un valore da arrayPet
+
       if (index !== otherIndex && pet.hasTheSameOwner(otherPet)) {
         // Se l'index è diverso (per evitare di confrontare lo stesso animale) e il proprietario è lo stesso
         listLi.style.color = "green"; // Se trova un animale con lo stesso proprietario, cambia il colore del testo a verde
